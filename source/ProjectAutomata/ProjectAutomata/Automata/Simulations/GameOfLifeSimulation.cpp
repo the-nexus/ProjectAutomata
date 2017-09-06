@@ -83,8 +83,6 @@ void GameOfLifeSimulation::nextStep()
 
 Color GameOfLifeSimulation::getCellColor(int state) const
 {
-	Color result = deadColor;
-
 	switch(state)
 	{
 	case 1:

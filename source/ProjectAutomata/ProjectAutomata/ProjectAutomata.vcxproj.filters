@@ -61,6 +61,12 @@
     <Filter Include="Source Files\Automata\Cells">
       <UniqueIdentifier>{9d826f56-d172-4148-9f80-3368f0e014fc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Utilities">
+      <UniqueIdentifier>{7547f86b-a04e-4a0f-8fe6-c73b62493b91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utilities">
+      <UniqueIdentifier>{47415f52-04d2-47b8-b331-0c9892d0a652}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core\ResourceInitializer.cpp">
@@ -105,6 +111,12 @@
     <ClCompile Include="Automata\Cells\GameOfLifeCell.cpp">
       <Filter>Source Files\Automata\Cells</Filter>
     </ClCompile>
+    <ClCompile Include="Automata\Cells\ForestFireCell.cpp">
+      <Filter>Source Files\Automata\Cells</Filter>
+    </ClCompile>
+    <ClCompile Include="Utilities\Math.cpp">
+      <Filter>Source Files\Utilities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\ResourceInitializer.h">
@@ -148,6 +160,12 @@
     </ClInclude>
     <ClInclude Include="Automata\Cells\Cell.h">
       <Filter>Header Files\Automata\Cells</Filter>
+    </ClInclude>
+    <ClInclude Include="Automata\Cells\ForestFireCell.h">
+      <Filter>Header Files\Automata\Cells</Filter>
+    </ClInclude>
+    <ClInclude Include="Utilities\Math.h">
+      <Filter>Header Files\Utilities</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

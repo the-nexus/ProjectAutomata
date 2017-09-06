@@ -61,6 +61,23 @@ float Color::operator[](int index)
 	return result;
 }
 
+Color Color::operator*(float value)
+{
+	return Color(r * value, g * value, b * value);
+}
+
+Color Color::operator*(float value) const
+{
+	return Color(r * value, g * value, b * value);
+}
+
+void  Color::operator*=(float value)
+{
+	r *= value;
+	g *= value;
+	b *= value;
+}
+
 bool Color::equals(const Color& col) const
 {
 	return r == col.r && g == col.g && b == col.b;

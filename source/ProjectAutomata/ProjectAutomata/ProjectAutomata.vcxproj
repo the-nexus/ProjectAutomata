@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Automata\Cells\Cell.cpp" />
+    <ClCompile Include="Automata\Cells\ForestFireCell.cpp" />
     <ClCompile Include="Automata\Cells\GameOfLifeCell.cpp" />
     <ClCompile Include="Automata\Simulations\ForestFireSimulation.cpp" />
     <ClCompile Include="Automata\Simulations\GameOfLifeSimulation.cpp" />
@@ -33,9 +34,11 @@
     <ClCompile Include="IO\IOManager.cpp" />
     <ClCompile Include="Libraries\picopng.cpp" />
     <ClCompile Include="UI\TextLabel.cpp" />
+    <ClCompile Include="Utilities\Math.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Automata\Cells\Cell.h" />
+    <ClInclude Include="Automata\Cells\ForestFireCell.h" />
     <ClInclude Include="Automata\Cells\GameOfLifeCell.h" />
     <ClInclude Include="Automata\Simulations\ForestFireSimulation.h" />
     <ClInclude Include="Automata\Simulations\GameOfLifeSimulation.h" />
@@ -49,6 +52,7 @@
     <ClInclude Include="IO\IOManager.h" />
     <ClInclude Include="Libraries\picopng.h" />
     <ClInclude Include="UI\TextLabel.h" />
+    <ClInclude Include="Utilities\Math.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

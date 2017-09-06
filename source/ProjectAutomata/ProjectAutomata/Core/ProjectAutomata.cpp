@@ -8,6 +8,8 @@
 #include "ResourceInitializer.h"
 #include "../IO/FontManager.h"
 #include "../Automata/Simulations/GameOfLifeSimulation.h"
+#include "../Automata/Simulations/ForestFireSimulation.h"
+#include "../Utilities/Math.h"
 
 using namespace std;
 ProjectAutomata* ProjectAutomata::instance = nullptr;
@@ -211,6 +213,9 @@ void ProjectAutomata::processSpecialKey(int key, bool isDown)
 
 void ProjectAutomata::setupProgram()
 {
+	// Utilities
+	Math::Initialize();
+
 	// OpenGL
 	glDepthFunc(GL_LEQUAL);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -227,7 +232,7 @@ void ProjectAutomata::setupProgram()
 	lblFpsVal = new TextLabel(FontManager::getInstance()->getFont(0), lblFps->getSize(), "", lblFps->getWidth(), lblFps->getY());
 
 	// Simulation
-	simulation = new GameOfLifeSimulation();
+	simulation = new ForestFireSimulation();
 
 	padding = 60.f;
 	tileSize = 5.f;

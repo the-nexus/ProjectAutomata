@@ -49,7 +49,6 @@ private:
 	// Constants
 	const int FPS = 60;
 	const int DELAY = 1000 / FPS;
-	const double PI = 3.14159;
 
 	// Execution
 	bool isRunning;

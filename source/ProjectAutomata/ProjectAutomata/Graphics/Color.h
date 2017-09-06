@@ -11,6 +11,9 @@ public:
 	Color(const Color& col);
 
 	float operator[](int index);
+	Color operator*(float value);
+	Color operator*(float value) const;
+	void operator*=(float value);
 	bool equals(const Color& col) const;
 
 	float r;

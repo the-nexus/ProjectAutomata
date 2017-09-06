@@ -19,7 +19,7 @@ void Simulation::setupSimulation()
 	reset();
 
 	// Non-transient variables init
-	stepDuration = 0.05f;
+	stepDuration = 0.01f;
 
 	// Transient variables init
 	paused = false;
