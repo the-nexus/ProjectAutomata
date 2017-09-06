@@ -29,8 +29,8 @@ ProjectAutomata::ProjectAutomata()
 		keys[i] = false;
 	}
 
-	lastFpsUpdate = 0;
-	fpsUpdateDelay = 100;
+	lastFpsUpdate = 0.f;
+	fpsUpdateDelay = 0.1f;
 }
 
 ProjectAutomata::~ProjectAutomata()
@@ -54,58 +54,51 @@ string ProjectAutomata::fixDecimalText(string text, int decimalCount)
 		return text;
 }
 
-void ProjectAutomata::initializeWindow(int argc, char** argv)
+void ProjectAutomata::setupWindow(int argc, char** argv)
 {
-	if (!isRunning)
+	cout << "Creating window..." << endl;
+
+	// Initialize GLUT
+	glutInit(&argc, argv);
+
+	// Setup the memory buffers for the display
+	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH);
+	// Set the window size
+	glutInitWindowSize(width, height);
+	// Create the window with a specific title
+	glutCreateWindow("Project Epsilon");
+	// Bind the two functions above to respond when necessary
+	glutReshapeFunc(ProjectAutomata::updateViewport);
+	glutDisplayFunc(ProjectAutomata::refreshWindow);
+
+	// FullScreen
+	//glutGameModeString("800×600:32@60");
+	//glutEnterGameMode();
+
+	// Mouse input
+	glutMouseFunc(mouseClickEvent);
+	glutPassiveMotionFunc(mouseMovementEvent);
+	glutMotionFunc(mouseMovementEvent);
+	glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE, GLUT_ACTION_CONTINUE_EXECUTION);
+
+	// Keyboard input
+	glutKeyboardFunc(keyDownEvent);
+	glutKeyboardUpFunc(keyUpEvent);
+	glutSpecialFunc(specialKeyDownEvent);
+	glutSpecialUpFunc(specialKeyUpEvent);
+
+	// Initialize the entry points of the OpenGL Driver to be able to call all the functions in the API
+	GLenum err = glewInit();
+	if (err != GLEW_OK)
 	{
-		// Initialize GLUT
-		glutInit(&argc, argv);
-
-		// Setup the memory buffers for the display
-		glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH);
-		// Set the window size
-		glutInitWindowSize(width, height);
-		// Create the window with a specific title
-		glutCreateWindow("Project Epsilon");
-		// Bind the two functions above to respond when necessary
-		glutReshapeFunc(ProjectAutomata::updateViewport);
-		glutDisplayFunc(ProjectAutomata::refreshWindow);
-
-		// FullScreen
-		//glutGameModeString("800×600:32@60");
-		//glutEnterGameMode();
-
-		// Mouse input
-		glutMouseFunc(mouseClickEvent);
-		glutPassiveMotionFunc(mouseMovementEvent);
-		glutMotionFunc(mouseMovementEvent);
-		glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE, GLUT_ACTION_CONTINUE_EXECUTION);
-
-		// Keyboard input
-		glutKeyboardFunc(keyDownEvent);
-		glutKeyboardUpFunc(keyUpEvent);
-		glutSpecialFunc(specialKeyDownEvent);
-		glutSpecialUpFunc(specialKeyUpEvent);
-
-		// Initialize the entry points of the OpenGL Driver to be able to call all the functions in the API
-		GLenum err = glewInit();
-		if (err != GLEW_OK)
-		{
-			fprintf(stderr, "GLEW failed to initialize");
-			exit(1);
-		}
-
-		initialize();
-		loop(0);
-		isRunning = true;
-		glutMainLoop();
+		fprintf(stderr, "GLEW failed to initialize");
+		exit(1);
 	}
 }
 
-void ProjectAutomata::release()
+void ProjectAutomata::cleanupWindow()
 {
-	delete simulation;
-	cout << "Application terminated" << endl;
+	cout << "Application terminated!" << endl;
 }
 
 void ProjectAutomata::refreshWindow()
@@ -160,14 +153,11 @@ void ProjectAutomata::updateViewport(int width, int height)
 
 void ProjectAutomata::loop(int lastTime)
 {
-
 	int currentTime = glutGet(GLUT_ELAPSED_TIME);
-	if (lastTime == 0)
-		lastTime = currentTime;
 
 	glutTimerFunc(ProjectAutomata::getInstance()->getDelay(), ProjectAutomata::loop, currentTime);
 
-	int timeDelta = currentTime - lastTime;
+	float timeDelta = (float)(currentTime - lastTime) / 1000.f;
 	ProjectAutomata::getInstance()->updateScene(timeDelta);
 	ProjectAutomata::getInstance()->renderScene();
 }
@@ -219,12 +209,11 @@ void ProjectAutomata::processSpecialKey(int key, bool isDown)
 
 }
 
-void ProjectAutomata::initialize()
+void ProjectAutomata::setupProgram()
 {
 	// OpenGL
 	glDepthFunc(GL_LEQUAL);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
 
 	// Resources
 	FontManager::getInstance()->addFont("Press Start", "./resources/textures/fonts/pressStart.png");
@@ -241,31 +230,47 @@ void ProjectAutomata::initialize()
 	simulation = new GameOfLifeSimulation();
 
 	padding = 60.f;
-	tileSize = 10.f;
+	tileSize = 5.f;
 	tileCountX = (int)((width - (2.f * padding)) / tileSize);
 	tileCountY = (int)((height - (2.f * padding)) / tileSize);
 
 	simulation->setBufferSize(tileCountX, tileCountY);
 	simulation->setupSimulation();
-
-	cout << "Finished initialization!" << endl;
 }
 
-void ProjectAutomata::updateScene(int timeDelta)
+void ProjectAutomata::runProgram()
 {
+	if (!isRunning)
+	{
+		loop(glutGet(GLUT_ELAPSED_TIME));
+		isRunning = true;
+		glutMainLoop();
+	}
+}
 
-	simulation->tick((float)timeDelta / 1000.f);
+void ProjectAutomata::cleanupProgram()
+{
+	delete lblFps;
+	delete lblFpsVal;
+	delete FontManager::getInstance();
+	delete simulation;
+	cout << "Cleaned up program!" << endl;
+}
+
+void ProjectAutomata::updateScene(float deltaTime)
+{
+	simulation->tick(deltaTime);
 
 	//UI
-	lblFps->update(timeDelta);
-	lblFpsVal->update(timeDelta);
-	lastFpsUpdate += timeDelta;
+	lblFps->update(deltaTime);
+	lblFpsVal->update(deltaTime);
+	lastFpsUpdate += deltaTime;
 	if (lastFpsUpdate > fpsUpdateDelay)
 	{
-		double fps = 1000.0 / (double)timeDelta;
+		float fps = 1.f / deltaTime;
 		string fpsText = std::to_string(fps);
 		lblFpsVal->setText(fixDecimalText(fpsText, 2));
-		lastFpsUpdate %= fpsUpdateDelay;
+		lastFpsUpdate = 0.f;
 	}
 }
 
@@ -311,10 +316,12 @@ int main(int argc, char** argv)
 	srand((unsigned int)time(nullptr));
 
 	ProjectAutomata* program = ProjectAutomata::getInstance();
-	program->initializeWindow(argc, argv);
-	program->release();
-
-	// TODO: Delete pointer for Project??
+	program->setupWindow(argc, argv);
+	program->setupProgram();
+	program->runProgram();
+	program->cleanupProgram();
+	program->cleanupWindow();
+	delete program;
 
 	return 0;
 }

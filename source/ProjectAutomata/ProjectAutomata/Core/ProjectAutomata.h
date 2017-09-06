@@ -22,24 +22,27 @@ public:
 	static void specialKeyDownEvent(int key, int x, int y);
 	static void specialKeyUpEvent(int key, int x, int y);
 
-	void initializeWindow(int argc, char** argv);
-	void initialize();
+	~ProjectAutomata();
+
+	void setupWindow(int argc, char** argv);
+	void cleanupWindow();
+	void setupProgram();
+	void runProgram();
+	void cleanupProgram();
 	int getWidth();
 	int getHeight();
-	void updateScene(int timeDelta);
+	void updateScene(float deltaTime);
 	void renderScene();
 	void processMouseClick(int button, int state, int x, int y);
 	void processMouseMovement(int x, int y);
 	void processKey(unsigned char key, bool isDown);
 	void processSpecialKey(int key, bool isDown);
 	int getDelay();
-	void release();
 
 	std::string fixDecimalText(std::string text, int decimalCount);
 
 private:
 	ProjectAutomata();
-	~ProjectAutomata();
 
 	static ProjectAutomata* instance;
 
@@ -62,8 +65,8 @@ private:
 	int height;
 
 	// FPS
-	int lastFpsUpdate;
-	int fpsUpdateDelay;
+	float lastFpsUpdate;
+	float fpsUpdateDelay;
 
 	// UI
 	TextLabel* lblFps;

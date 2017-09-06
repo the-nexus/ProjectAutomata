@@ -19,7 +19,7 @@ public:
 	void setPosition(double x, double y);
 	void setFont(Font* font);
 	void setSize(double size);
-	void update(int timeDelta);
+	void update(float deltaTime);
 	void draw();
 private:
 	void getCharMarks(char c, double &startX, double &startY, double &endX, double &endY);

@@ -19,7 +19,7 @@ void Simulation::setupSimulation()
 	reset();
 
 	// Non-transient variables init
-	stepDuration = 0.1f;
+	stepDuration = 0.05f;
 
 	// Transient variables init
 	paused = false;
@@ -92,7 +92,7 @@ void Simulation::tick(float deltaTime)
 		stepTime += deltaTime;
 		if (stepTime >= stepDuration)
 		{
-			stepTime -= stepDuration;
+			stepTime = 0.f;
 			nextStep();
 		}
 	}

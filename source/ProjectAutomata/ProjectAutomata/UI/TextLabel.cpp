@@ -76,7 +76,7 @@ void TextLabel::setSize(double size)
 	this->size = size;
 }
 
-void TextLabel::update(int timeDelta)
+void TextLabel::update(float deltaTime)
 {
 
 }
