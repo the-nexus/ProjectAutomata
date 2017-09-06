@@ -1,11 +1,13 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <time.h>
 #include "GL/glew.h"
 #include "GL/freeglut.h"
 #include "ProjectAutomata.h"
 #include "ResourceInitializer.h"
 #include "../IO/FontManager.h"
+#include "../Automata/Simulations/GameOfLifeSimulation.h"
 
 using namespace std;
 ProjectAutomata* ProjectAutomata::instance = nullptr;
@@ -102,6 +104,7 @@ void ProjectAutomata::initializeWindow(int argc, char** argv)
 
 void ProjectAutomata::release()
 {
+	delete simulation;
 	cout << "Application terminated" << endl;
 }
 
@@ -234,11 +237,25 @@ void ProjectAutomata::initialize()
 	lblFps = new TextLabel(FontManager::getInstance()->getFont(0), 8.0, "FPS: ", 10.0, 10.0);
 	lblFpsVal = new TextLabel(FontManager::getInstance()->getFont(0), lblFps->getSize(), "", lblFps->getWidth(), lblFps->getY());
 
+	// Simulation
+	simulation = new GameOfLifeSimulation();
+
+	padding = 60.f;
+	tileSize = 10.f;
+	tileCountX = (int)((width - (2.f * padding)) / tileSize);
+	tileCountY = (int)((height - (2.f * padding)) / tileSize);
+
+	simulation->setBufferSize(tileCountX, tileCountY);
+	simulation->setupSimulation();
+
 	cout << "Finished initialization!" << endl;
 }
 
 void ProjectAutomata::updateScene(int timeDelta)
 {
+
+	simulation->tick((float)timeDelta / 1000.f);
+
 	//UI
 	lblFps->update(timeDelta);
 	lblFpsVal->update(timeDelta);
@@ -266,6 +283,11 @@ void ProjectAutomata::renderScene()
 
 	// TODO: Draw scene
 
+	glTranslatef(padding, padding, 0.f);
+	glScalef(tileSize, tileSize, 1.f);
+
+	simulation->render();
+
 	glPopMatrix();
 
 
@@ -285,6 +307,9 @@ void ProjectAutomata::renderScene()
 
 int main(int argc, char** argv)
 {
+	// Init random seed
+	srand((unsigned int)time(nullptr));
+
 	ProjectAutomata* program = ProjectAutomata::getInstance();
 	program->initializeWindow(argc, argv);
 	program->release();

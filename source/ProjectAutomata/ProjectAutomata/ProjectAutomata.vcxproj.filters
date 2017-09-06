@@ -43,6 +43,24 @@
     <Filter Include="Source Files\UI">
       <UniqueIdentifier>{9fe3453e-9086-4816-957d-b0b3be2212d7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Automata">
+      <UniqueIdentifier>{7141398d-e4b9-4ceb-aa38-380ba3243263}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Automata\Simulations">
+      <UniqueIdentifier>{7242f4c0-eeb3-484c-8e68-c2d0d7cd6a85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Automata\Cells">
+      <UniqueIdentifier>{98e96538-5486-4e13-8045-b2dd2ef18fa3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Automata">
+      <UniqueIdentifier>{edf99170-a105-4889-b890-d802b7bbcb23}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Automata\Simulations">
+      <UniqueIdentifier>{303b3a97-3b8e-476a-8e63-aeec648e613f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Automata\Cells">
+      <UniqueIdentifier>{9d826f56-d172-4148-9f80-3368f0e014fc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core\ResourceInitializer.cpp">
@@ -72,6 +90,21 @@
     <ClCompile Include="Core\ProjectAutomata.cpp">
       <Filter>Source Files\Core</Filter>
     </ClCompile>
+    <ClCompile Include="Automata\Simulations\ForestFireSimulation.cpp">
+      <Filter>Source Files\Automata\Simulations</Filter>
+    </ClCompile>
+    <ClCompile Include="Automata\Simulations\GameOfLifeSimulation.cpp">
+      <Filter>Source Files\Automata\Simulations</Filter>
+    </ClCompile>
+    <ClCompile Include="Automata\Simulations\Simulation.cpp">
+      <Filter>Source Files\Automata\Simulations</Filter>
+    </ClCompile>
+    <ClCompile Include="Automata\Cells\Cell.cpp">
+      <Filter>Source Files\Automata\Cells</Filter>
+    </ClCompile>
+    <ClCompile Include="Automata\Cells\GameOfLifeCell.cpp">
+      <Filter>Source Files\Automata\Cells</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\ResourceInitializer.h">
@@ -100,6 +133,21 @@
     </ClInclude>
     <ClInclude Include="Core\ProjectAutomata.h">
       <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Automata\Simulations\ForestFireSimulation.h">
+      <Filter>Header Files\Automata\Simulations</Filter>
+    </ClInclude>
+    <ClInclude Include="Automata\Simulations\GameOfLifeSimulation.h">
+      <Filter>Header Files\Automata\Simulations</Filter>
+    </ClInclude>
+    <ClInclude Include="Automata\Simulations\Simulation.h">
+      <Filter>Header Files\Automata\Simulations</Filter>
+    </ClInclude>
+    <ClInclude Include="Automata\Cells\GameOfLifeCell.h">
+      <Filter>Header Files\Automata\Cells</Filter>
+    </ClInclude>
+    <ClInclude Include="Automata\Cells\Cell.h">
+      <Filter>Header Files\Automata\Cells</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

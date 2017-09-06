@@ -7,31 +7,16 @@ struct Color
 {
 public:
 	Color();
-	Color(double r, double g, double b);
-	Color(double r, double g, double b, double a);
+	Color(float red, float green, float blue, float alpha = 1.f);
 	Color(const Color& col);
 
-	void setColor(double r, double g, double b);
-	void setColor(double r, double g, double b, double a);
-	void setColor(const Color& col);
-	void setRed(double r);
-	void setGreen(double g);
-	void setBlue(double b);
-	void setAlpha(double a);
-
-	double getRed() const;
-	double getGreen() const;
-	double getBlue() const;
-	double getAlpha() const;
-
+	float operator[](int index);
 	bool equals(const Color& col) const;
-	double operator[](int i);
-private:
-	std::vector<double> color;
-	const int R_INDEX = 0;
-	const int G_INDEX = 1;
-	const int B_INDEX = 2;
-	const int A_INDEX = 3;
+
+	float r;
+	float g;
+	float b;
+	float a;
 };
 
 #endif

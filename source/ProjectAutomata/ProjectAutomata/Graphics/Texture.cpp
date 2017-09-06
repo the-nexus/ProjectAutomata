@@ -143,10 +143,10 @@ Color Texture::getPixelColor(double x, double y)
 
 	int vecPos = ((int)(y * 255) * width + (int)(x * 255)) * 4;
 
-	pixelColor.setRed((double)imageData[vecPos + 0] / 255.0);
-	pixelColor.setGreen((double)imageData[vecPos + 1] / 255.0);
-	pixelColor.setBlue((double)imageData[vecPos + 2] / 255.0);
-	pixelColor.setAlpha((double)imageData[vecPos + 3] / 255.0);
+	pixelColor.r = imageData[vecPos + 0] / 255.f;
+	pixelColor.g = imageData[vecPos + 1] / 255.f;
+	pixelColor.b = imageData[vecPos + 2] / 255.f;
+	pixelColor.a = imageData[vecPos + 3] / 255.f;
 
 	return pixelColor;
 }

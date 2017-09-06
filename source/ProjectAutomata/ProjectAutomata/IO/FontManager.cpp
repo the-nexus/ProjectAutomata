@@ -58,5 +58,5 @@ Font* FontManager::getFont(char* name)
 
 int FontManager::getFontCount()
 {
-	return fonts.size();
+	return (int)fonts.size();
 }

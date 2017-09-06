@@ -19,6 +19,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Automata\Cells\Cell.cpp" />
+    <ClCompile Include="Automata\Cells\GameOfLifeCell.cpp" />
+    <ClCompile Include="Automata\Simulations\ForestFireSimulation.cpp" />
+    <ClCompile Include="Automata\Simulations\GameOfLifeSimulation.cpp" />
+    <ClCompile Include="Automata\Simulations\Simulation.cpp" />
     <ClCompile Include="Core\ProjectAutomata.cpp" />
     <ClCompile Include="Core\ResourceInitializer.cpp" />
     <ClCompile Include="Graphics\Color.cpp" />
@@ -30,6 +35,11 @@
     <ClCompile Include="UI\TextLabel.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Automata\Cells\Cell.h" />
+    <ClInclude Include="Automata\Cells\GameOfLifeCell.h" />
+    <ClInclude Include="Automata\Simulations\ForestFireSimulation.h" />
+    <ClInclude Include="Automata\Simulations\GameOfLifeSimulation.h" />
+    <ClInclude Include="Automata\Simulations\Simulation.h" />
     <ClInclude Include="Core\ProjectAutomata.h" />
     <ClInclude Include="Core\ResourceInitializer.h" />
     <ClInclude Include="Graphics\Color.h" />
@@ -95,17 +105,20 @@
     <OutDir>$(SolutionDir)\bin\$(Platform)\</OutDir>
     <TargetName>$(ProjectName)D</TargetName>
     <ExecutablePath>$(VC_ExecutablePath_x64);$(WindowsSDK_ExecutablePath);$(VS_ExecutablePath);$(MSBuild_ExecutablePath);$(FxCopDir);$(PATH);</ExecutablePath>
-    <IntDir>$(Platform)\$(Configuration)\</IntDir>
+    <IntDir>$(SolutionDir)\intermediates\$(Configuration)\$(Platform)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)\bin\$(Platform)\</OutDir>
+    <IntDir>$(SolutionDir)\intermediates\$(Configuration)\$(Platform)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)\bin\$(Platform)\</OutDir>
     <TargetName>$(ProjectName)D</TargetName>
+    <IntDir>$(SolutionDir)\intermediates\$(Configuration)\$(Platform)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)\bin\$(Platform)\</OutDir>
+    <IntDir>$(SolutionDir)\intermediates\$(Configuration)\$(Platform)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

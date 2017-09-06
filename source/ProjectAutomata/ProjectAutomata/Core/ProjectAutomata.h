@@ -6,6 +6,7 @@
 #include <vector>
 #include "../Graphics/Texture.h"
 #include "../UI/TextLabel.h"
+#include "../Automata/Simulations/Simulation.h"
 
 class ProjectAutomata
 {
@@ -67,6 +68,13 @@ private:
 	// UI
 	TextLabel* lblFps;
 	TextLabel* lblFpsVal;
+
+	// Simulation
+	Simulation* simulation;
+	float padding;
+	float tileSize;
+	int tileCountX;
+	int tileCountY;
 };
 
 #endif
