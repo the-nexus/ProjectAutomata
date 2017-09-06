@@ -30,3 +30,7 @@
 *.exe
 *.out
 *.app
+
+# Directories
+source/ProjectAutomata/.vs
+source/ProjectAutomata/bin
