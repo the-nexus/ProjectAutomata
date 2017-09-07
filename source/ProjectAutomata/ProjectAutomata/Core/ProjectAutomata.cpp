@@ -9,6 +9,7 @@
 #include "../IO/FontManager.h"
 #include "../Automata/Simulations/GameOfLifeSimulation.h"
 #include "../Automata/Simulations/ForestFireSimulation.h"
+#include "../Automata/Simulations/VotingSimulation.h"
 #include "../Utilities/Math.h"
 
 using namespace std;
@@ -232,10 +233,10 @@ void ProjectAutomata::setupProgram()
 	lblFpsVal = new TextLabel(FontManager::getInstance()->getFont(0), lblFps->getSize(), "", lblFps->getWidth(), lblFps->getY());
 
 	// Simulation
-	simulation = new GameOfLifeSimulation();
+	simulation = new VotingSimulation();
 
 	padding = 60.f;
-	tileSize = 5.f;
+	tileSize = 4.f;
 	tileCountX = (int)((width - (2.f * padding)) / tileSize);
 	tileCountY = (int)((height - (2.f * padding)) / tileSize);
 

@@ -23,6 +23,7 @@
     <ClCompile Include="Automata\Simulations\ForestFireSimulation.cpp" />
     <ClCompile Include="Automata\Simulations\GameOfLifeSimulation.cpp" />
     <ClCompile Include="Automata\Simulations\Simulation.cpp" />
+    <ClCompile Include="Automata\Simulations\VotingSimulation.cpp" />
     <ClCompile Include="Core\ProjectAutomata.cpp" />
     <ClCompile Include="Core\ResourceInitializer.cpp" />
     <ClCompile Include="Graphics\Color.cpp" />
@@ -39,6 +40,7 @@
     <ClInclude Include="Automata\Simulations\ForestFireSimulation.h" />
     <ClInclude Include="Automata\Simulations\GameOfLifeSimulation.h" />
     <ClInclude Include="Automata\Simulations\Simulation.h" />
+    <ClInclude Include="Automata\Simulations\VotingSimulation.h" />
     <ClInclude Include="Core\ProjectAutomata.h" />
     <ClInclude Include="Core\ResourceInitializer.h" />
     <ClInclude Include="Graphics\Color.h" />

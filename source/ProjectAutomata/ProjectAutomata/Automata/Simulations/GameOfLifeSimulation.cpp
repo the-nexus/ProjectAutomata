@@ -1,4 +1,5 @@
 #include "GameOfLifeSimulation.h"
+#include "../../Utilities/Math.h"
 
 
 const Color GameOfLifeSimulation::aliveColor = Color(1.f, 1.f, 1.f);
@@ -21,10 +22,8 @@ void GameOfLifeSimulation::reset()
 	{
 		for (int j = 0; j < bufferHeight; ++j)
 		{
-			int randVal = rand() % 2;
-			frontBuffer[i][j]->setState(randVal);
-			Color col = getCellColor(frontBuffer[i][j]->getState());
-			frontBuffer[i][j]->setColor(col);
+			frontBuffer[i][j]->setState(Math::Rand() % 2);
+			frontBuffer[i][j]->setColor(getCellColor(frontBuffer[i][j]->getState()));
 		}
 	}
 

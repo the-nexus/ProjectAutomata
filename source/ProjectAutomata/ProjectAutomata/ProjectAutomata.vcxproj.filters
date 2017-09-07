@@ -111,6 +111,9 @@
     <ClCompile Include="Utilities\Math.cpp">
       <Filter>Source Files\Utilities</Filter>
     </ClCompile>
+    <ClCompile Include="Automata\Simulations\VotingSimulation.cpp">
+      <Filter>Source Files\Automata\Simulations</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\ResourceInitializer.h">
@@ -154,6 +157,9 @@
     </ClInclude>
     <ClInclude Include="Utilities\Math.h">
       <Filter>Header Files\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Automata\Simulations\VotingSimulation.h">
+      <Filter>Header Files\Automata\Simulations</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
