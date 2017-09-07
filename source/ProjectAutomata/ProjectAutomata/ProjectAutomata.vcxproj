@@ -20,8 +20,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Automata\Cells\Cell.cpp" />
-    <ClCompile Include="Automata\Cells\ForestFireCell.cpp" />
-    <ClCompile Include="Automata\Cells\GameOfLifeCell.cpp" />
     <ClCompile Include="Automata\Simulations\ForestFireSimulation.cpp" />
     <ClCompile Include="Automata\Simulations\GameOfLifeSimulation.cpp" />
     <ClCompile Include="Automata\Simulations\Simulation.cpp" />
@@ -38,8 +36,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Automata\Cells\Cell.h" />
-    <ClInclude Include="Automata\Cells\ForestFireCell.h" />
-    <ClInclude Include="Automata\Cells\GameOfLifeCell.h" />
     <ClInclude Include="Automata\Simulations\ForestFireSimulation.h" />
     <ClInclude Include="Automata\Simulations\GameOfLifeSimulation.h" />
     <ClInclude Include="Automata\Simulations\Simulation.h" />

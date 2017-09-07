@@ -232,7 +232,7 @@ void ProjectAutomata::setupProgram()
 	lblFpsVal = new TextLabel(FontManager::getInstance()->getFont(0), lblFps->getSize(), "", lblFps->getWidth(), lblFps->getY());
 
 	// Simulation
-	simulation = new ForestFireSimulation();
+	simulation = new GameOfLifeSimulation();
 
 	padding = 60.f;
 	tileSize = 5.f;

@@ -108,12 +108,6 @@
     <ClCompile Include="Automata\Cells\Cell.cpp">
       <Filter>Source Files\Automata\Cells</Filter>
     </ClCompile>
-    <ClCompile Include="Automata\Cells\GameOfLifeCell.cpp">
-      <Filter>Source Files\Automata\Cells</Filter>
-    </ClCompile>
-    <ClCompile Include="Automata\Cells\ForestFireCell.cpp">
-      <Filter>Source Files\Automata\Cells</Filter>
-    </ClCompile>
     <ClCompile Include="Utilities\Math.cpp">
       <Filter>Source Files\Utilities</Filter>
     </ClCompile>
@@ -155,13 +149,7 @@
     <ClInclude Include="Automata\Simulations\Simulation.h">
       <Filter>Header Files\Automata\Simulations</Filter>
     </ClInclude>
-    <ClInclude Include="Automata\Cells\GameOfLifeCell.h">
-      <Filter>Header Files\Automata\Cells</Filter>
-    </ClInclude>
     <ClInclude Include="Automata\Cells\Cell.h">
-      <Filter>Header Files\Automata\Cells</Filter>
-    </ClInclude>
-    <ClInclude Include="Automata\Cells\ForestFireCell.h">
       <Filter>Header Files\Automata\Cells</Filter>
     </ClInclude>
     <ClInclude Include="Utilities\Math.h">

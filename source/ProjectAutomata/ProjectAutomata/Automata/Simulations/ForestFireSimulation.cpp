@@ -1,5 +1,4 @@
 #include "ForestFireSimulation.h"
-#include "../Cells/ForestFireCell.h"
 #include "../../Utilities/Math.h"
 
 
@@ -10,28 +9,12 @@ const Color ForestFireSimulation::emptyColor = Color(0.f, 0.f, 0.f);
 
 ForestFireSimulation::ForestFireSimulation()
 {
-
+	stepDuration = 0.01f;
 }
 
 ForestFireSimulation::~ForestFireSimulation()
 {
 
-}
-
-void ForestFireSimulation::setupBuffers()
-{
-	frontBuffer = new Cell**[bufferWidth];
-	backBuffer = new Cell**[bufferWidth];
-	for (int i = 0; i < bufferWidth; ++i)
-	{
-		frontBuffer[i] = new Cell*[bufferHeight];
-		backBuffer[i] = new Cell*[bufferHeight];
-		for (int j = 0; j < bufferHeight; ++j)
-		{
-			frontBuffer[i][j] = new ForestFireCell();
-			backBuffer[i][j] = new ForestFireCell();
-		}
-	}
 }
 
 void ForestFireSimulation::reset()
@@ -53,28 +36,31 @@ void ForestFireSimulation::nextStep()
 	// render front buffer
 	int currentTimeToLive = 0;
 	float randomProbability = 0.f;
-	ForestFireCell* frontCell = nullptr;
-	ForestFireCell* backCell = nullptr;
+	Cell* frontCell = nullptr;
+	Cell* backCell = nullptr;
 
 
 	for (int i = 0; i < bufferWidth; ++i)
 	{
 		for (int j = 0; j < bufferHeight; ++j)
 		{
-			switch (frontBuffer[i][j]->getState())
+			frontCell = frontBuffer[i][j];
+			backCell = backBuffer[i][j];
+
+			switch (frontCell->getState())
 			{
 			case 0:
 				randomProbability = (float)Math::RandRange();
 				if (randomProbability <= probabilityGrowth)
 				{
 					// tree grows
-					backBuffer[i][j]->setState(1);
-					backBuffer[i][j]->setColor(getCellColor(backBuffer[i][j]->getState()));
+					backCell->setState(1);
+					backCell->setColor(getCellColor(backCell->getState()));
 				}
 				else
 				{
-					backBuffer[i][j]->setState(frontBuffer[i][j]->getState());
-					backBuffer[i][j]->setColor(frontBuffer[i][j]->getColor());
+					backCell->setState(frontCell->getState());
+					backCell->setColor(frontCell->getColor());
 				}
 				break;
 
@@ -84,27 +70,23 @@ void ForestFireSimulation::nextStep()
 				if (randomProbability <= probabilityCatchFire || isNeighbourOnFire(i, j))
 				{
 					// tree catches fire
-					backCell = static_cast<ForestFireCell*>(backBuffer[i][j]);
 					backCell->setState(2);
 					backCell->setTimeToLive(maxTimeToLive);
 					backCell->setColor(getCellColor(backCell->getState(), backCell->getTimeToLive()));
 				}
 				else
 				{
-					backBuffer[i][j]->setState(frontBuffer[i][j]->getState());
-					backBuffer[i][j]->setColor(frontBuffer[i][j]->getColor());
+					backCell->setState(frontCell->getState());
+					backCell->setColor(frontCell->getColor());
 				}
 				break;
 
 			case 2:
-				frontCell = static_cast<ForestFireCell*>(frontBuffer[i][j]);
-				backCell = static_cast<ForestFireCell*>(backBuffer[i][j]);
-				currentTimeToLive = frontCell->getTimeToLive();
-				if (currentTimeToLive > 1)
+				if (frontCell->getTimeToLive() > 1)
 				{
 					// decrease time to live of fire
 					backCell->setState(2);
-					backCell->setTimeToLive(currentTimeToLive - 1);
+					backCell->setTimeToLive(frontCell->getTimeToLive() - 1);
 					backCell->setColor(getCellColor(backCell->getState(), backCell->getTimeToLive()));
 				}
 				else

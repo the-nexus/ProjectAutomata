@@ -2,7 +2,6 @@
 #define GAME_OF_LIFE_SIMULATION_H
 
 #include "Simulation.h"
-#include "../Cells/GameOfLifeCell.h"
 
 // STATES:
 // 0 : dead
@@ -17,7 +16,6 @@ public:
 	GameOfLifeSimulation();
 	~GameOfLifeSimulation();
 
-	virtual void setupBuffers() override;
 	virtual void reset() override;
 	virtual void nextStep() override;
 

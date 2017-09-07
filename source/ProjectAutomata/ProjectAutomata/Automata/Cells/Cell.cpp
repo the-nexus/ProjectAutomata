@@ -4,6 +4,7 @@ Cell::Cell()
 {
 	state = 0;
 	color = Color(0.f, 0.f, 0.f);
+	timeToLive = 0;
 }
 
 Cell::~Cell()
@@ -40,4 +41,14 @@ void Cell::setColor(const Color& inColor)
 Color Cell::getColor() const
 {
 	return color;
+}
+
+void Cell::setTimeToLive(int inTimeToLive)
+{
+	timeToLive = inTimeToLive;
+}
+
+int Cell::getTimeToLive() const
+{
+	return timeToLive;
 }

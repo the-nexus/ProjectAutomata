@@ -5,7 +5,8 @@
 
 Simulation::Simulation()
 {
-
+	stepDuration = 1.f;
+	paused = true;
 }
 
 Simulation::~Simulation()
@@ -17,9 +18,6 @@ Simulation::~Simulation()
 void Simulation::setupSimulation()
 {
 	reset();
-
-	// Non-transient variables init
-	stepDuration = 0.01f;
 
 	// Transient variables init
 	paused = false;
@@ -102,7 +100,18 @@ void Simulation::tick(float deltaTime)
 // Simulation management
 void Simulation::setupBuffers()
 {
-	// do nothing
+	frontBuffer = new Cell**[bufferWidth];
+	backBuffer = new Cell**[bufferWidth];
+	for (int i = 0; i < bufferWidth; ++i)
+	{
+		frontBuffer[i] = new Cell*[bufferHeight];
+		backBuffer[i] = new Cell*[bufferHeight];
+		for (int j = 0; j < bufferHeight; ++j)
+		{
+			frontBuffer[i][j] = new Cell();
+			backBuffer[i][j] = new Cell();
+		}
+	}
 }
 
 void Simulation::cleanupBuffers()

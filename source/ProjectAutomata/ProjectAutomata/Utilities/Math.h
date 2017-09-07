@@ -9,15 +9,15 @@ public:
 	static const float PI;
 
 	static int Rand();
-	static int Rand(int minVal, int maxVal);
 	static double RandRange();
-	static double RandRange(double minVal, double maxVal);
 
 	static void Initialize();
 
 private:
 	static bool initialized;
 	static std::mt19937 generator;
+	static std::uniform_int_distribution<> integerDistribution;
+	static std::uniform_real_distribution<> realDistribution;
 };
 
 #endif

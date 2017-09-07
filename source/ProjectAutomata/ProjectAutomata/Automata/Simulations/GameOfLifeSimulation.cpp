@@ -1,5 +1,4 @@
 #include "GameOfLifeSimulation.h"
-#include "../Cells/GameOfLifeCell.h"
 
 
 const Color GameOfLifeSimulation::aliveColor = Color(1.f, 1.f, 1.f);
@@ -8,28 +7,12 @@ const Color GameOfLifeSimulation::deadColor = Color(0.f, 0.f, 0.f);
 
 GameOfLifeSimulation::GameOfLifeSimulation()
 {
-
+	stepDuration = 0.05f;
 }
 
 GameOfLifeSimulation::~GameOfLifeSimulation()
 {
 
-}
-
-void GameOfLifeSimulation::setupBuffers()
-{
-	frontBuffer = new Cell**[bufferWidth];
-	backBuffer = new Cell**[bufferWidth];
-	for (int i = 0; i < bufferWidth; ++i)
-	{
-		frontBuffer[i] = new Cell*[bufferHeight];
-		backBuffer[i] = new Cell*[bufferHeight];
-		for (int j = 0; j < bufferHeight; ++j)
-		{
-			frontBuffer[i][j] = new GameOfLifeCell();
-			backBuffer[i][j] = new GameOfLifeCell();
-		}
-	}
 }
 
 void GameOfLifeSimulation::reset()

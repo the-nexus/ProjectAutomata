@@ -2,7 +2,6 @@
 #define FOREST_FIRE_SIMULATION_H
 
 #include "Simulation.h"
-#include "../Cells/ForestFireCell.h"
 
 // STATES:
 // 0 : dead
@@ -18,7 +17,6 @@ public:
 	ForestFireSimulation();
 	~ForestFireSimulation();
 
-	virtual void setupBuffers() override;
 	virtual void reset() override;
 	virtual void nextStep() override;
 
