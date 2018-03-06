@@ -8,6 +8,7 @@ const Color GameOfLifeSimulation::deadColor = Color(0.f, 0.f, 0.f);
 
 GameOfLifeSimulation::GameOfLifeSimulation()
 {
+	simulationType = SimulationType::GameOfLife;
 	stepDuration = 0.05f;
 }
 

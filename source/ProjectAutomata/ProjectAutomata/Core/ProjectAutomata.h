@@ -29,6 +29,7 @@ public:
 	void setupProgram();
 	void runProgram();
 	void cleanupProgram();
+	void changeSimulation(SimulationType newSimulationType);
 	int getWidth();
 	int getHeight();
 	void updateScene(float deltaTime);

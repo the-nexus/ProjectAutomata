@@ -16,6 +16,7 @@ const Color VotingSimulation::jOpinionColor = Color(0.5f, 0.5f, 0.5f);
 
 VotingSimulation::VotingSimulation()
 {
+	simulationType = SimulationType::Voting;
 	stepDuration = 0.05f;
 	opinionCount = 2;
 	majorityThreshold = 0.5f;

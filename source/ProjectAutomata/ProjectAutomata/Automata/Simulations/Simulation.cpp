@@ -5,6 +5,7 @@
 
 Simulation::Simulation()
 {
+	simulationType = SimulationType::MAX_VALUE;
 	stepDuration = 1.f;
 	paused = true;
 }
@@ -233,4 +234,12 @@ void Simulation::swapBuffers()
 	Cell*** tempBuffer = frontBuffer;
 	frontBuffer = backBuffer;
 	backBuffer = tempBuffer;
+}
+
+
+
+// Other getters and setters
+SimulationType Simulation::getSimulationType() const
+{
+	return simulationType;
 }
