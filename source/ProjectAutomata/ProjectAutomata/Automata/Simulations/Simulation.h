@@ -3,6 +3,14 @@
 
 #include "../Cells/Cell.h"
 
+enum class SimulationType
+{
+	GameOfLife,
+	ForestFire,
+	Voting,
+	MAX_VALUE
+};
+
 class Simulation
 {
 public:
@@ -30,10 +38,15 @@ public:
 	void setGenerationDuration(float inGenerationDuration);
 	float getGenerationDuration() const;
 
+	// Other getters and setters
+	SimulationType getSimulationType() const;
+
 protected:
 	Simulation();
 
 	void swapBuffers();
+
+	SimulationType simulationType;
 
 	Cell*** frontBuffer;
 	Cell*** backBuffer;

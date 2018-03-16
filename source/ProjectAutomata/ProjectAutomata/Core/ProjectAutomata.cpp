@@ -209,7 +209,31 @@ void ProjectAutomata::processKey(unsigned char key, bool isDown)
 
 void ProjectAutomata::processSpecialKey(int key, bool isDown)
 {
+	switch (key)
+	{
+	case GLUT_KEY_LEFT:
+		if (simulation != nullptr && !isDown)
+		{
+			int maxSimTypeValue = (int)SimulationType::MAX_VALUE;
+			int currentSimTypeValue = (int)simulation->getSimulationType();
+			SimulationType newSimulationType = (SimulationType)((currentSimTypeValue - 1 + maxSimTypeValue) % maxSimTypeValue);
+			changeSimulation(newSimulationType);
+		}
+		break;
 
+	case GLUT_KEY_RIGHT:
+		if (simulation != nullptr && !isDown)
+		{
+			int maxSimTypeValue = (int)SimulationType::MAX_VALUE;
+			int currentSimTypeValue = (int)simulation->getSimulationType();
+			SimulationType newSimulationType = (SimulationType)((currentSimTypeValue + 1 + maxSimTypeValue) % maxSimTypeValue);
+			changeSimulation(newSimulationType);
+		}
+		break;
+
+	default:
+		break;
+	}
 }
 
 void ProjectAutomata::setupProgram()
@@ -232,16 +256,12 @@ void ProjectAutomata::setupProgram()
 	lblFps = new TextLabel(FontManager::getInstance()->getFont(0), 8.0, "FPS: ", 10.0, 10.0);
 	lblFpsVal = new TextLabel(FontManager::getInstance()->getFont(0), lblFps->getSize(), "", lblFps->getWidth(), lblFps->getY());
 
-	// Simulation
-	simulation = new VotingSimulation();
-
 	padding = 60.f;
 	tileSize = 4.f;
 	tileCountX = (int)((width - (2.f * padding)) / tileSize);
 	tileCountY = (int)((height - (2.f * padding)) / tileSize);
 
-	simulation->setBufferSize(tileCountX, tileCountY);
-	simulation->setupSimulation();
+	changeSimulation(SimulationType::GameOfLife);
 }
 
 void ProjectAutomata::runProgram()
@@ -256,16 +276,65 @@ void ProjectAutomata::runProgram()
 
 void ProjectAutomata::cleanupProgram()
 {
-	delete lblFps;
-	delete lblFpsVal;
-	delete FontManager::getInstance();
-	delete simulation;
+	if (simulation != nullptr)
+	{
+		simulation->cleanupSimulation();
+	}
+
 	cout << "Cleaned up program!" << endl;
+}
+
+void ProjectAutomata::changeSimulation(SimulationType newSimulationType)
+{
+	if (simulation != nullptr)
+	{
+		// Check if we are already using this type of simulation
+		if (simulation->getSimulationType() == newSimulationType)
+		{
+			return;
+		}
+
+		// Cleanup old simulation
+		if (simulation != nullptr)
+		{
+			simulation->cleanupSimulation();
+			delete simulation;
+		}
+	}
+
+	// Create new simulation
+	switch (newSimulationType)
+	{
+	case SimulationType::GameOfLife:
+		simulation = new GameOfLifeSimulation();
+		break;
+
+	case SimulationType::ForestFire:
+		simulation = new ForestFireSimulation();
+		break;
+
+	case SimulationType::Voting:
+		simulation = new VotingSimulation();
+		break;
+
+	default:
+		break;
+	}
+
+	// Setup new simulation
+	if (simulation != nullptr)
+	{
+		simulation->setBufferSize(tileCountX, tileCountY);
+		simulation->setupSimulation();
+	}
 }
 
 void ProjectAutomata::updateScene(float deltaTime)
 {
-	simulation->tick(deltaTime);
+	if (simulation != nullptr)
+	{
+		simulation->tick(deltaTime);
+	}
 
 	//UI
 	lblFps->update(deltaTime);
@@ -297,7 +366,10 @@ void ProjectAutomata::renderScene()
 	glTranslatef(padding, padding, 0.f);
 	glScalef(tileSize, tileSize, 1.f);
 
-	simulation->render();
+	if (simulation != nullptr)
+	{
+		simulation->render();
+	}
 
 	glPopMatrix();
 

@@ -9,6 +9,7 @@ const Color ForestFireSimulation::emptyColor = Color(0.f, 0.f, 0.f);
 
 ForestFireSimulation::ForestFireSimulation()
 {
+	simulationType = SimulationType::ForestFire;
 	stepDuration = 0.01f;
 }
 
